@@ -1,7 +1,7 @@
-<?php
-
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+class ControllerProjet {
+    public static function list() {
+        $model = new ModelProjet();
+        $projects = $model->getByResponsable($_SESSION['login_id']);
+        include '../view/projet/list.php';
+    }
+}

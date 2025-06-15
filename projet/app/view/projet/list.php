@@ -1,5 +1,5 @@
-<?php require_once '../views/partials/header.php'; ?>
-<?php require_once '../views/partials/menu.php'; ?>
+<?php require_once '../view/fragment/header.php'; ?>
+<?php require_once '../view/fragment/Menu.php'; ?>
 
 <div class="container">
     <h1>Liste de mes projets</h1>

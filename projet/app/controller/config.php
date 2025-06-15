@@ -1,7 +1,15 @@
 <?php
+class Database {
+    private static $db;
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+    public static function getConnection() {
+        if (!self::$db) {
+            self::$db = new mysqli('localhost', 'root', '', 'projet');
+            if (self::$db->connect_error) {
+                die("Connexion échouée : " . self::$db->connect_error);
+            }
+        }
+        return self::$db;
+    }
+}
+?>

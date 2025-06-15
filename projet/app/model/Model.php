@@ -1,7 +1,15 @@
 <?php
+require_once 'config.php';
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+abstract class Model {
+    protected static $pdo;
+
+    public static function getPdo() {
+        if (!isset(self::$pdo)) {
+            self::$pdo = Database::getConnection();
+        }
+        return self::$pdo;
+    }
+}
+?>
 
