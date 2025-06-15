@@ -4,22 +4,27 @@ $userName = $_SESSION['user_name'] ?? '';
 $roles = $_SESSION['roles'] ?? [];
 ?>
 
-<nav>
-    <div class="menu-bar" style="padding: 10px; background-color: #f0f0f0;">
-        <span class="student-names"><strong><?= $studentNames ?></strong></span>
-        <?php if ($userName): ?>
-            <span class="user-name" style="margin-left: 20px;">Connecté : <?= $userName ?></span>
-        <?php endif; ?>
+<nav style="background-color: #003366; color: white; padding: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <span style="font-weight: bold; font-size: 18px; margin-right: 20px;">
+                <?= $studentNames ?>
+            </span>
 
-        <div class="menu-items" style="margin-top: 10px;">
+            <?php if ($userName): ?>
+                <span style="font-style: italic;">Connecté en tant que : <?= $userName ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
             <?php if (!empty($roles['responsable'])): ?>
                 <div class="dropdown">
-                    <button class="dropbtn">Responsable ▼</button>
+                    <span class="dropbtn">Responsable ▼</span>
                     <div class="dropdown-content">
-                        <a href="?action=projetList">Mes projets</a>
+                        <a href="?action=projetList">Liste de mes projets</a>
                         <a href="?action=projetAdd">Ajouter un projet</a>
                         <hr>
-                        <a href="?action=examinateurList">Tous les examinateurs</a>
+                        <a href="?action=examinateurList">Liste des examinateurs</a>
                         <a href="?action=examinateurAdd">Ajouter un examinateur</a>
                         <a href="?action=projetExaminateurs">Examinateurs d’un projet</a>
                         <hr>
@@ -30,7 +35,7 @@ $roles = $_SESSION['roles'] ?? [];
 
             <?php if (!empty($roles['examinateur'])): ?>
                 <div class="dropdown">
-                    <button class="dropbtn">Examinateur ▼</button>
+                    <span class="dropbtn">Examinateur ▼</span>
                     <div class="dropdown-content">
                         <a href="?action=creneauList">Mes créneaux</a>
                         <a href="?action=creneauAdd">Ajouter un créneau</a>
@@ -42,7 +47,7 @@ $roles = $_SESSION['roles'] ?? [];
 
             <?php if (!empty($roles['etudiant'])): ?>
                 <div class="dropdown">
-                    <button class="dropbtn">Étudiant ▼</button>
+                    <span class="dropbtn">Étudiant ▼</span>
                     <div class="dropdown-content">
                         <a href="?action=rdvList">Mes rendez-vous</a>
                         <a href="?action=rdvAdd">Prendre un rendez-vous</a>
@@ -51,17 +56,58 @@ $roles = $_SESSION['roles'] ?? [];
             <?php endif; ?>
 
             <div class="dropdown">
-                <button class="dropbtn">Innovations ▼</button>
+                <span class="dropbtn">Innovations ▼</span>
                 <div class="dropdown-content">
                     <a href="?action=innovations">Voir nos idées</a>
                 </div>
             </div>
 
             <?php if ($userName): ?>
-                <a href="?action=logout" class="login-btn">Se déconnecter</a>
+                <a href="?action=logout" style="color: white;">Se déconnecter</a>
             <?php else: ?>
-                <a href="?action=login" class="login-btn">Se connecter</a>
+                <a href="?action=login" style="color: white;">Se connecter</a>
             <?php endif; ?>
         </div>
     </div>
 </nav>
+
+<!-- CSS minimal pour dropdown -->
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        color: black;
+        min-width: 220px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 6px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content hr {
+        margin: 5px 0;
+        border: none;
+        border-top: 1px solid #ccc;
+    }
+</style>
