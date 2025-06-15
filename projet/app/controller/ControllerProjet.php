@@ -1,3 +1,4 @@
+<?php
 class ControllerProjet {
     public static function list() {
         $model = new ModelProjet();
@@ -5,3 +6,4 @@ class ControllerProjet {
         include '../view/projet/list.php';
     }
 }
+?>

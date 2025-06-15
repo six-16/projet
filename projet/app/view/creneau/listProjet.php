@@ -1,5 +1,5 @@
 <?php require_once '../view/fragment/header.php'; ?>
-<?php require_once '../view/fragment/menu.php'; ?>
+<?php require_once '../view/fragment/Menu.php'; ?>
 
 <h2>Mes créneaux pour un projet</h2>
 <table border="1">

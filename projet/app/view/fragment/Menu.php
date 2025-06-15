@@ -1,78 +1,67 @@
 <?php
-session_start();
-$studentNames = "CRAVE-MIEMOUNITOU"; // À remplacer par les noms des étudiants du binôme
-$userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
-$roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : [];
+$studentNames = "CRAVE-MIEMOUNITOU";
+$userName = $_SESSION['user_name'] ?? '';
+$roles = $_SESSION['roles'] ?? [];
 ?>
 
 <nav>
-    <div class="menu-bar">
-        <span class="student-names"><?= $studentNames ?></span>
+    <div class="menu-bar" style="padding: 10px; background-color: #f0f0f0;">
+        <span class="student-names"><strong><?= $studentNames ?></strong></span>
         <?php if ($userName): ?>
-            <span class="user-name"><?= $userName ?></span>
+            <span class="user-name" style="margin-left: 20px;">Connecté : <?= $userName ?></span>
         <?php endif; ?>
-        
-        <div class="menu-items">
-            <?php if ($roles['responsable']): ?>
+
+        <div class="menu-items" style="margin-top: 10px;">
+            <?php if (!empty($roles['responsable'])): ?>
                 <div class="dropdown">
                     <button class="dropbtn">Responsable ▼</button>
                     <div class="dropdown-content">
-                        <a href="/projects">Liste de mes projets</a>
-                        <a href="/projects/add">Ajout un projet</a>
+                        <a href="?action=projetList">Mes projets</a>
+                        <a href="?action=projetAdd">Ajouter un projet</a>
                         <hr>
-                        <a href="/projects/examiners">Liste des examinateurs</a>
-                        <a href="/projects/examiners">Ajout d'un examinateur</a>
-                        <a href="/projects/examiners">Liste des examinateurs d'un projet</a>
+                        <a href="?action=examinateurList">Tous les examinateurs</a>
+                        <a href="?action=examinateurAdd">Ajouter un examinateur</a>
+                        <a href="?action=projetExaminateurs">Examinateurs d’un projet</a>
                         <hr>
-                        <a href="/projects">Planning d'un projet</a>
+                        <a href="?action=projetPlanning">Planning d’un projet</a>
                     </div>
                 </div>
             <?php endif; ?>
-            
-            <?php if ($roles['examinateur']): ?>
+
+            <?php if (!empty($roles['examinateur'])): ?>
                 <div class="dropdown">
                     <button class="dropbtn">Examinateur ▼</button>
                     <div class="dropdown-content">
-                        <a href="/examiner/projects">Liste des projets</a>
-                        <a href="/examiner/slots">Liste complète des mes créneaux</a>
-                        <a href="/examiner/slots/add">Liste des mes créneaux pour un projet </a>
-                        <a href="/examiner/slots/add-consecutive">Ajouter un créneau à un projet</a>
-                        <a href="/examiner/slots/add-consecutive">Ajouter des créneaux consécutifs</a>
+                        <a href="?action=creneauList">Mes créneaux</a>
+                        <a href="?action=creneauAdd">Ajouter un créneau</a>
+                        <a href="?action=creneauAddConsecutifs">Ajouter créneaux consécutifs</a>
+                        <a href="?action=creneauListProjet">Créneaux d’un projet</a>
                     </div>
                 </div>
             <?php endif; ?>
-            
-            <?php if ($roles['etudiant']): ?>
+
+            <?php if (!empty($roles['etudiant'])): ?>
                 <div class="dropdown">
-                    <button class="dropbtn">Etudiant ▼</button>
+                    <button class="dropbtn">Étudiant ▼</button>
                     <div class="dropdown-content">
-                        <a href="/student/appointments">Liste de mes rendez-vous</a>
-                        <a href="/student/appointments/book">Prendre un rendez-vous pour un projet</a>
+                        <a href="?action=rdvList">Mes rendez-vous</a>
+                        <a href="?action=rdvAdd">Prendre un rendez-vous</a>
                     </div>
                 </div>
             <?php endif; ?>
-            
+
             <div class="dropdown">
                 <button class="dropbtn">Innovations ▼</button>
                 <div class="dropdown-content">
-                    <a href="/innovations">Nos innovations</a>
+                    <a href="?action=innovations">Voir nos idées</a>
                 </div>
             </div>
-            
+
             <?php if ($userName): ?>
-                <a href="/logout" class="login-btn">Se déconnecter</a>
+                <a href="?action=logout" class="login-btn">Se déconnecter</a>
             <?php else: ?>
-                <a href="/login" class="login-btn">Se connecter</a>
+                <a href="?action=login" class="login-btn">Se connecter</a>
             <?php endif; ?>
-                
-            <div class="dropdown">
-                <button class="dropbtn">Se connecter ▼</button>
-                <div class="dropdown-content">
-                    <a href="/innovations">Login</a>
-                    <a href="/innovations">S'inscrire</a>
-                    <a href="/innovations">Déconnexion</a>
-                </div>
-            </div>
         </div>
     </div>
 </nav>

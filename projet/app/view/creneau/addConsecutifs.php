@@ -1,5 +1,5 @@
 <?php require_once '../view/fragment/header.php'; ?>
-<?php require_once '../view/fragment/menu.php'; ?>
+<?php require_once '../view/fragment/Menu.php'; ?>
 
 <h2>Ajouter des créneaux consécutifs</h2>
 <form method="post" action="?action=creneauxCreated">

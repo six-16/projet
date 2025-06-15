@@ -1,63 +1,67 @@
 
-<!-- ----- debut Router2 -->
 <?php
-require ('../controller/ControllerVin.php');
-require ('../controller/ControllerProducteur.php');
-require ('../controller/ControllerCave.php');
-require ('../controller/ControllerRecolte.php');
+require('../controller/ControllerPersonne.php');
+require('../controller/ControllerProjet.php');
+require('../controller/ControllerCreneau.php');
+require('../controller/ControllerRDV.php');
+require('../controller/ControllerInnovation.php');
 
-// --- récupération de l'action passée dans l'URL
+// --- Récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
-
-// fonction parse_str permet de construire 
-// une table de hachage (clé + valeur)
 parse_str($query_string, $param);
-
-// --- $action contient le nom de la méthode statique recherchée
-$action = htmlspecialchars($param["action"]);
-
-// --- Modification du routeur pour prendre en compte l'ensemble des paramètres
-$action = $param['action'];
-
-// --- On supprime l'élément action de la structure
+$action = isset($param['action']) ? htmlspecialchars($param['action']) : null;
 unset($param['action']);
-
-// --- Tout ce qui reste sont des arguments
 $args = $param;
 
-// --- Liste des méthodes autorisées
+// --- Liste des actions disponibles
 switch ($action) {
-    case "vinReadAll" :
-    case "vinReadOne" :
-    case "vinReadId" :
-    case "vinCreate" :
-    case "vinCreated" :
-    case "vinDeleted" :
-        // passage des arguments au controleur
-        ControllerVin::$action($args);
+
+    // === AUTHENTIFICATION ===
+    case 'login':
+    case 'connect':
+    case 'logout':
+    case 'register':
+    case 'registerConfirm':
+        ControllerPersonne::$action($args);
         break;
-    case "producteurReadAll" :
-    case "producteurReadId" :
-    case "producteurReadOne" :
-    case "producteurCreate" :
-    case "producteurCreated" :
-    case "producteurSansDoublons" :
-    case "producteurRegion" :
-    case "producteurDeleted" :
-        ControllerProducteur::$action($args);
+
+    // === PROJETS (Responsable) ===
+    case 'projetList':
+    case 'projetAdd':
+    case 'projetCreated':
+    case 'examinateurList':
+    case 'examinateurAdd':
+    case 'examinateurCreated':
+    case 'projetExaminateurs':
+    case 'projetPlanning':
+        ControllerProjet::$action($args);
         break;
-    case "recolteReadAll" :
-    case "recolteCreate" :
-    case "recolteCreated" :
-        ControllerRecolte::$action($args);
+
+    // === CRENEAUX (Examinateur) ===
+    case 'creneauList':
+    case 'creneauAdd':
+    case 'creneauCreated':
+    case 'creneauAddConsecutifs':
+    case 'creneauxCreated':
+    case 'creneauListProjet':
+        ControllerCreneau::$action($args);
         break;
-    case "mesPropositions" :
-        ControllerCave::$action($args);
+
+    // === RENDEZ-VOUS (Étudiant) ===
+    case 'rdvList':
+    case 'rdvAdd':
+    case 'rdvCreated':
+        ControllerRDV::$action($args);
         break;
-    // Tache par défaut
+
+    // === INNOVATIONS (tous rôles) ===
+    case 'innovations':
+        ControllerInnovation::$action($args);
+        break;
+
+    // === ACTION PAR DÉFAUT ===
     default:
-        $action = "caveAccueil";
-        ControllerCave::$action($args);
+        ControllerPersonne::login([]); // redirection vers connexion
+        break;
 }
 ?>
-<!-- ----- Fin Router2 -->

@@ -1,5 +1,5 @@
 <?php require_once '../view/fragment/header.php'; ?>
-<?php require_once '../view/fragment/menu.php'; ?>
+<?php require_once '../view/fragment/Menu.php'; ?>
 
 <h2>Connexion</h2>
 

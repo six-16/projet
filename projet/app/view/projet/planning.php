@@ -1,5 +1,5 @@
 <?php require_once '../view/fragment/header.php'; ?>
-<?php require_once '../view/fragment/menu.php'; ?>
+<?php require_once '../view/fragment/Menu.php'; ?>
 
 <h2>Planning des soutenances du projet</h2>
 <table border="1">
