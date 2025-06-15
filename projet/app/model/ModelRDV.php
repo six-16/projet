@@ -2,6 +2,11 @@
 require_once 'Model.php';
 
 class ModelRDV {
+    public static function rdvList($args) {
+        $rdvs = ModelRDV::getByEtudiantFromView($_SESSION['login_id']);
+        include '../view/rdv/list.php';
+    }
+
     public static function getByEtudiant($id) {
         $db = Database::getConnection();
         $stmt = $db->prepare("SELECT * FROM rdv WHERE etudiant = ?");
@@ -32,5 +37,12 @@ class ModelRDV {
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    public static function getAllWithDetails() {
+        $db = self::getPdo();
+        $query = "SELECT * FROM infordv";
+        $result = $db->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>

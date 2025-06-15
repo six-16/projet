@@ -6,33 +6,32 @@
     <p>Cette interface vous permet de visualiser tous les projets dont vous êtes responsable.</p>
 
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Label</th>
-                    <th>Responsable</th>
-                    <th>Taille du groupe</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($projects as $project): ?>
-                <tr>
-                    <td><?= htmlspecialchars($project['label']) ?></td>
-                    <td><?= htmlspecialchars($_SESSION['user_name']) ?></td>
-                    <td><?= htmlspecialchars($project['groupe']) ?></td>
-                    <td>
-                        <a href="/projects/<?= $project['id'] ?>/examiners" class="btn btn-sm btn-info">Voir examinateurs</a>
-                        <a href="/projects/<?= $project['id'] ?>/schedule" class="btn btn-sm btn-primary">Voir planning</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <h2>Liste des créneaux (avec projet + examinateur)</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Projet</th>
+      <th>Groupe</th>
+      <th>Examinateur</th>
+      <th>Date / Heure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($creneaux as $c): ?>
+      <tr>
+        <td><?= htmlspecialchars($c['label']) ?></td>
+        <td><?= htmlspecialchars($c['groupe']) ?></td>
+        <td><?= htmlspecialchars($c['prenom']) . ' ' . htmlspecialchars($c['nom']) ?></td>
+        <td><?= htmlspecialchars($c['creneau']) ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
     </div>
 </div>
 
-<?php require_once '../views/partials/footer.php'; ?>
+<?php require_once '../views/fragment/footer.php'; ?>
 
 <?php
 class Project {
@@ -42,6 +41,7 @@ class Project {
         $database = new Database();
         $this->db = $database->getConnection();
     }
+    
 
     // Méthode pour récupérer les projets d'un responsable
     public function getByResponsable($responsableId) {

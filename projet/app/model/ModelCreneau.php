@@ -2,7 +2,11 @@
 require_once 'Model.php';
 
 class ModelCreneau {
-    
+    public static function creneauList($args) {
+        $creneaux = ModelCreneau::getAllInfos();
+        include '../view/creneau/list.php';
+    }
+
     public static function getByExaminateur($id) {
          $db = self::getPdo();
     $stmt = $db->prepare("
@@ -30,5 +34,12 @@ class ModelCreneau {
         $stmt->bind_param("iis", $projet, $examinateur, $datetime);
         return $stmt->execute();
     }
+    public static function getAllWithDetails() {
+        $db = self::getPdo();
+        $query = "SELECT * FROM infocreneaux";
+        $result = $db->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>
