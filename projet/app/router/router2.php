@@ -3,7 +3,7 @@ require_once '../controller/config.php';
 session_start();
 
 // Réinitialisation de login_id si demandé
-if (isset($_GET['reset']) {
+if (isset($_GET['reset'])) {
     unset($_SESSION['login_id']);
     unset($_SESSION['roles']);
 }
@@ -19,81 +19,43 @@ $action = $_GET['action'] ?? 'home';
 switch ($action) {
     
     // Actions de connexion
-    case 'login':
-        ControllerConnexion::login();
-        break;
-    case 'logout':
-        ControllerConnexion::logout();
-        break;
-    case 'register':
-        ControllerConnexion::register();
-        break;
-        
-    // Actions du responsable
-    case 'responsableListProjets':
-        ControllerResponsable::listProjets();
-        break;
-    case 'responsableAddProjet':
-        ControllerResponsable::addProjet();
-        break;
-    case 'responsableListExaminateurs':
-        ControllerResponsable::listExaminateurs();
-        break;
-    case 'responsableAddExaminateur':
-        ControllerResponsable::addExaminateur();
-        break;
-    case 'responsableListExaminateursProjet':
-        ControllerResponsable::listExaminateursProjet();
-        break;
-    case 'responsablePlanning':
-        ControllerResponsable::planningProjet();
+    case "login":
+    case "logout":
+    case "register":
+        ControllerConnexion::$action();
         break;
     
+    // Actions du responsable
     case "ListProjets":
     case "addProjet":
     case "ListExaminateurs":
     case "addExaminateur":
     case "listExaminateursProjet":
-    case
-        
-        
+    case "Planning":
+        ControllerResponsable::$action();
+        break;
+    
     // Actions de l'examinateur
-    case 'examinateurListProjets':
-        ControllerExaminateur::listProjets();
-        break;
-    case 'examinateurListAllCreneaux':
-        ControllerExaminateur::listAllCreneaux();
-        break;
-    case 'examinateurListCreneauxProjet':
-        ControllerExaminateur::listCreneauxProjet();
-        break;
-    case 'examinateurAddCreneau':
-        ControllerExaminateur::addCreneau();
-        break;
-    case 'examinateurAddListCreneaux':
-        ControllerExaminateur::addListCreneaux();
+    case "ListProjets":
+    case "ListAllCreneaux":
+    case "ListCreneauxProjet":
+    case "AddCreneau":
+    case "AddListCreneaux":
+        ControllerExaminateur::$action();
         break;
     
     // Actions de l'étudiant
-    case 'etudiantListRendezVous':
-        ControllerEtudiant::listRendezVous();
-        break;
-    case 'etudiantPrendreRendezVous':
-        ControllerEtudiant::prendreRendezVous();
-        break;
-    case 'getCreneauxDisponibles':
-        ControllerEtudiant::getCreneauxDisponibles();
+    case "ListRendezVous":
+    case "PrendreRendezVous":
+    case "getCreneauxDisponibles":
+        ControllerEtudiant::$action();
         break;
     
     // Actions d'innovation
-    case 'innovation':
-        ControllerInnovation::index();
-        break;
-    case 'innovationFonctionOriginale':
-        ControllerInnovation::fonctionOriginale();
-        break;
-    case 'innovationAmeliorationCode':
-        ControllerInnovation::ameliorationCode();
+    case "innovation":
+    case "innovationFonctionOriginale":
+    case "innovationAmeliorationCode":
+        ControllerInnovation::$action();
         break;
     
     // Autres actions...
