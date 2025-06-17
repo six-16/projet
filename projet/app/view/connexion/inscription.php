@@ -1,6 +1,7 @@
 <?php 
-require ($root . '/app/view/fragment/fragmentHeader.html');
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');
 ?>
+
 
 <body>
     <div class="container mt-5" style="max-width: 600px;">

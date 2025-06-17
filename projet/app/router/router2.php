@@ -15,6 +15,7 @@ require_once '../controller/controllerEtudiant.php';
 require_once '../controller/controllerInnovation.php';
 
 $action = $_GET['action'] ?? 'home';
+$roles = $_SESSION['roles'] ?? [];
 
 // --- récupération de l'action passée dans l'URL
     $query_string = $_SERVER['QUERY_STRING'];
