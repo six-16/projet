@@ -4,12 +4,14 @@ require_once '../model/ModelResponsable.php';
 class ControllerResponsable {
     
     public static function listProjets() {
+        include 'config.php';
         $login_id = $_SESSION['login_id'];
         $projets = ModelResponsable::getProjetsByResponsable($login_id);
         require '../view/responsable/listProjet.php';
     }
 
     public static function addProjet() {
+        include 'config.php';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $label = $_POST['label'];
             $groupe = $_POST['groupe'];
@@ -31,11 +33,13 @@ class ControllerResponsable {
     }
 
     public static function listExaminateurs() {
+        include 'config.php';
         $examinateurs = ModelResponsable::getAllExaminateurs();
         require '../view/responsable/listExaminateur.php';
     }
 
     public static function addExaminateur() {
+        include 'config.php';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
@@ -54,6 +58,7 @@ class ControllerResponsable {
     }
 
     public static function listExaminateursProjet() {
+        include 'config.php';
         $login_id = $_SESSION['login_id'];
         $projets = ModelResponsable::getProjetsByResponsable($login_id);
         
@@ -65,6 +70,7 @@ class ControllerResponsable {
     }
 
     public static function planningProjet() {
+        include 'config.php';
         $login_id = $_SESSION['login_id'];
         $projets = ModelResponsable::getProjetsByResponsable($login_id);
         

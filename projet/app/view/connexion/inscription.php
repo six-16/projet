@@ -1,6 +1,8 @@
 <?php 
-require ($root . '/app/view/fragment/fragmentHeader.html');
+require_once '../fragment/fragmentHeader.html'; 
 ?>
+
+
 
 <body>
     <div class="container mt-5" style="max-width: 600px;">
@@ -62,7 +64,8 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
     </div>
     
     <?php 
-    require ($root . '/app/view/fragment/fragmentFooter.html');
+    require_once '../fragment/fragmentFooter.html'; 
     ?>
+
 </body>
 </html>

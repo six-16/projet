@@ -3,6 +3,8 @@ require_once '../model/ModelConnexion.php';
 
 class ControllerConnexion {
     public static function login() {
+        include 'config.php';
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $login = $_POST['login'];
             $password = $_POST['password'];
@@ -36,6 +38,7 @@ class ControllerConnexion {
     }
 
     public static function logout() {
+        include 'config.php';
         session_unset();
         session_destroy();
         header('Location: router2.php');
@@ -43,6 +46,7 @@ class ControllerConnexion {
     }
 
     public static function register() {
+        include 'config.php';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];

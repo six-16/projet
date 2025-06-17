@@ -4,18 +4,21 @@ require_once '../model/ModelExaminateur.php';
 class ControllerExaminateur {
     
     public static function listProjets() {
+        include 'config.php';
         $examinateur_id = $_SESSION['login_id'];
         $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
         require '../view/examinateur/listProjet.php';
     }
 
     public static function listAllCreneaux() {
+        include 'config.php';
         $examinateur_id = $_SESSION['login_id'];
         $creneaux = ModelExaminateur::getAllCreneauxByExaminateur($examinateur_id);
         require '../view/examinateur/listCreneauxAll.php';
     }
 
     public static function listCreneauxProjet() {
+        include 'config.php';
         $examinateur_id = $_SESSION['login_id'];
         $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
         
@@ -30,6 +33,7 @@ class ControllerExaminateur {
     }
 
     public static function addCreneau() {
+        include 'config.php';
         $examinateur_id = $_SESSION['login_id'];
         $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
         
@@ -55,6 +59,7 @@ class ControllerExaminateur {
     }
 
     public static function addListCreneaux() {
+        include 'config.php';
         $examinateur_id = $_SESSION['login_id'];
         $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
         
