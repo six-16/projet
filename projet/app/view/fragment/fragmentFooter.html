@@ -1,0 +1,12 @@
+
+<!-- ----- début footer.html -->
+<p />
+<hr />
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-right: 20px; margin-left: 20px;">
+    <p>Projet LO07 P25</p>
+    <p>Organisation des soutenances de projets</p>
+    <p>Sixtine Crave, Yandy-Alexandre Miemounitou</p>
+</div>
+<hr />
+
+<!-- ----- fin footer.html -->

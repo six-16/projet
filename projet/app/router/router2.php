@@ -1,67 +1,117 @@
-
 <?php
-require('../controller/ControllerPersonne.php');
-require('../controller/ControllerProjet.php');
-require('../controller/ControllerCreneau.php');
-require('../controller/ControllerRDV.php');
-require('../controller/ControllerInnovation.php');
+require_once '../controller/config.php';
+session_start();
 
-// --- Récupération de l'action passée dans l'URL
-$query_string = $_SERVER['QUERY_STRING'];
-parse_str($query_string, $param);
-$action = isset($param['action']) ? htmlspecialchars($param['action']) : null;
-unset($param['action']);
-$args = $param;
+// Réinitialisation de login_id si demandé
+if (isset($_GET['reset']) {
+    unset($_SESSION['login_id']);
+    unset($_SESSION['roles']);
+}
 
-// --- Liste des actions disponibles
+require_once '../controller/controllerConnexion.php';
+require_once '../controller/controllerResponsable.php';
+require_once '../controller/controllerExaminateur.php';
+require_once '../controller/controllerEtudiant.php';
+require_once '../controller/controllerInnovation.php';
+
+$action = $_GET['action'] ?? 'home';
+
 switch ($action) {
-
-    // === AUTHENTIFICATION ===
+    
+    // Actions de connexion
     case 'login':
-    case 'connect':
+        ControllerConnexion::login();
+        break;
     case 'logout':
+        ControllerConnexion::logout();
+        break;
     case 'register':
-    case 'registerConfirm':
-        ControllerPersonne::$action($args);
+        ControllerConnexion::register();
         break;
-
-    // === PROJETS (Responsable) ===
-    case 'projetList':
-    case 'projetAdd':
-    case 'projetCreated':
-    case 'examinateurList':
-    case 'examinateurAdd':
-    case 'examinateurCreated':
-    case 'projetExaminateurs':
-    case 'projetPlanning':
-        ControllerProjet::$action($args);
+        
+    // Actions du responsable
+    case 'responsableListProjets':
+        ControllerResponsable::listProjets();
         break;
-
-    // === CRENEAUX (Examinateur) ===
-    case 'creneauList':
-    case 'creneauAdd':
-    case 'creneauCreated':
-    case 'creneauAddConsecutifs':
-    case 'creneauxCreated':
-    case 'creneauListProjet':
-        ControllerCreneau::$action($args);
+    case 'responsableAddProjet':
+        ControllerResponsable::addProjet();
         break;
-
-    // === RENDEZ-VOUS (Étudiant) ===
-    case 'rdvList':
-    case 'rdvAdd':
-    case 'rdvCreated':
-        ControllerRDV::$action($args);
+    case 'responsableListExaminateurs':
+        ControllerResponsable::listExaminateurs();
         break;
-
-    // === INNOVATIONS (tous rôles) ===
-    case 'innovations':
-        ControllerInnovation::$action($args);
+    case 'responsableAddExaminateur':
+        ControllerResponsable::addExaminateur();
         break;
-
-    // === ACTION PAR DÉFAUT ===
+    case 'responsableListExaminateursProjet':
+        ControllerResponsable::listExaminateursProjet();
+        break;
+    case 'responsablePlanning':
+        ControllerResponsable::planningProjet();
+        break;
+    
+    case "ListProjets":
+    case "addProjet":
+    case "ListExaminateurs":
+    case "addExaminateur":
+    case "listExaminateursProjet":
+    case
+        
+        
+    // Actions de l'examinateur
+    case 'examinateurListProjets':
+        ControllerExaminateur::listProjets();
+        break;
+    case 'examinateurListAllCreneaux':
+        ControllerExaminateur::listAllCreneaux();
+        break;
+    case 'examinateurListCreneauxProjet':
+        ControllerExaminateur::listCreneauxProjet();
+        break;
+    case 'examinateurAddCreneau':
+        ControllerExaminateur::addCreneau();
+        break;
+    case 'examinateurAddListCreneaux':
+        ControllerExaminateur::addListCreneaux();
+        break;
+    
+    // Actions de l'étudiant
+    case 'etudiantListRendezVous':
+        ControllerEtudiant::listRendezVous();
+        break;
+    case 'etudiantPrendreRendezVous':
+        ControllerEtudiant::prendreRendezVous();
+        break;
+    case 'getCreneauxDisponibles':
+        ControllerEtudiant::getCreneauxDisponibles();
+        break;
+    
+    // Actions d'innovation
+    case 'innovation':
+        ControllerInnovation::index();
+        break;
+    case 'innovationFonctionOriginale':
+        ControllerInnovation::fonctionOriginale();
+        break;
+    case 'innovationAmeliorationCode':
+        ControllerInnovation::ameliorationCode();
+        break;
+    
+    // Autres actions...
+    
     default:
-        ControllerPersonne::login([]); // redirection vers connexion
+        if (isset($_SESSION['login_id'])) {
+            // Redirection selon le rôle
+            if ($_SESSION['roles']['responsable']) {
+                header('Location: router2.php?action=responsableListProjets');
+            } elseif ($_SESSION['roles']['examinateur']) {
+                header('Location: router2.php?action=examinateurListProjets');
+            } elseif ($_SESSION['roles']['etudiant']) {
+                header('Location: router2.php?action=etudiantListRendezVous');
+            }
+            exit();
+        } else {
+            require '../view/connexion/login.php';
+        }
         break;
 }
 ?>
