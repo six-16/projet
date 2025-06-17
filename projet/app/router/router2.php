@@ -64,11 +64,11 @@ switch ($action) {
         if (isset($_SESSION['login_id'])) {
             // Redirection selon le rôle
             if ($_SESSION['roles']['responsable']) {
-                header('Location: router2.php?action=responsableListProjets');
+                header('Location: router2.php?action=ListProjets');
             } elseif ($_SESSION['roles']['examinateur']) {
-                header('Location: router2.php?action=examinateurListProjets');
+                header('Location: router2.php?action=ListProjets');
             } elseif ($_SESSION['roles']['etudiant']) {
-                header('Location: router2.php?action=etudiantListRendezVous');
+                header('Location: router2.php?action=ListRendezVous');
             }
             exit();
         } else {
