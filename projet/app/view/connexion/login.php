@@ -1,5 +1,9 @@
 <?php 
 require ($root . '/app/view/fragment/fragmentHeader.html');
+require ($root . '/app/view/fragment/fragmentMenu.php');
+require ($root . '/app/view/fragment/fragmentJumbotron.html');
+
+
 ?>
 
 <body>

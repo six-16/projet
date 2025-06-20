@@ -2,7 +2,12 @@
 require_once '../controller/config.php';
 session_start();
 
-// Réinitialisation de login_id si demandé
+
+// Activer les erreurs (à désactiver en production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Réinitialisation si demandé
 if (isset($_GET['reset'])) {
     unset($_SESSION['login_id']);
     unset($_SESSION['roles']);
@@ -14,30 +19,25 @@ require_once '../controller/controllerExaminateur.php';
 require_once '../controller/controllerEtudiant.php';
 require_once '../controller/controllerInnovation.php';
 
+// --- Action par défaut
 $action = $_GET['action'] ?? 'home';
 $roles = $_SESSION['roles'] ?? [];
 
-// --- récupération de l'action passée dans l'URL
-    $query_string = $_SERVER['QUERY_STRING'];
-
-    // fonction parse_str permet de construire 
-    // une table de hachage (clé + valeur)
-    parse_str($query_string, $param);
-
-    // --- $action contient le nom de la méthode statique recherchée
-    $action = htmlspecialchars($param["action"]);
+// Récupération + nettoyage
+$query_string = $_SERVER['QUERY_STRING'];
+parse_str($query_string, $param);
+$action = htmlspecialchars($param["action"] ?? 'home');
 
 switch ($action) {
-    
+
     // Actions de connexion
     case "login":
     case "logout":
     case "register":
         ControllerConnexion::$action();
         break;
-    
+
     // Actions du responsable
-    case "ListProjets":
     case "addProjet":
     case "ListExaminateurs":
     case "addExaminateur":
@@ -45,43 +45,59 @@ switch ($action) {
     case "Planning":
         ControllerResponsable::$action();
         break;
-    
+
     // Actions de l'examinateur
-    case "ListProjets":
     case "ListAllCreneaux":
     case "ListCreneauxProjet":
     case "AddCreneau":
     case "AddListCreneaux":
         ControllerExaminateur::$action();
         break;
-    
+
+    // Actions partagées (ListProjets)
+    case "ListProjets":
+        // Permet aux deux rôles d'accéder à ListProjets
+        if (!empty($_SESSION['roles']['responsable'])) {
+            ControllerResponsable::ListProjets();
+        } elseif (!empty($_SESSION['roles']['examinateur'])) {
+            ControllerExaminateur::ListProjets();
+        } else {
+            echo "<p>Accès non autorisé à ListProjets</p>";
+        }
+        break;
+
     // Actions de l'étudiant
     case "ListRendezVous":
     case "PrendreRendezVous":
     case "getCreneauxDisponibles":
         ControllerEtudiant::$action();
         break;
-    
+
     // Actions d'innovation
     case "innovation":
     case "fonctionOriginale":
     case "ameliorationCode":
         ControllerInnovation::$action();
         break;
-    
-    // Autres actions...
-    
+
+    // Redirection par défaut
     default:
         if (isset($_SESSION['login_id'])) {
-            // Redirection selon le rôle
-            if ($_SESSION['roles']['responsable']) {
+            $roles = $_SESSION['roles'] ?? [];
+
+            if (!empty($roles['responsable'])) {
                 header('Location: router2.php?action=ListProjets');
-            } elseif ($_SESSION['roles']['examinateur']) {
+                exit();
+            } elseif (!empty($roles['examinateur'])) {
                 header('Location: router2.php?action=ListProjets');
-            } elseif ($_SESSION['roles']['etudiant']) {
+                exit();
+            } elseif (!empty($roles['etudiant'])) {
                 header('Location: router2.php?action=ListRendezVous');
+                exit();
+            } else {
+                echo "<p>Aucun rôle détecté pour cet utilisateur.</p>";
+                require '../view/connexion/login.php';
             }
-            exit();
         } else {
             require '../view/connexion/login.php';
         }

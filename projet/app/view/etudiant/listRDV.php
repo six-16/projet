@@ -1,9 +1,14 @@
-<?php require_once '../fragment/fragmentHeader.html'; ?>
+<?php 
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');
+?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
     
     <div class="container mt-5">
+            <?php 
+            include $root . '/app/view/fragment/fragmentMenu.html';
+            ?>
+
         <h2>Liste de mes rendez-vous</h2>
         
         <?php if (empty($rdvs)): ?>
@@ -30,6 +35,8 @@
         <?php endif; ?>
     </div>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php 
+        include $root . '/app/view/fragment/fragmentFooter.html';
+    ?>
 </body>
 </html>

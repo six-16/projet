@@ -1,7 +1,11 @@
-<?php require_once '../fragment/fragmentHeader.html'; ?>
+<?php 
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');
+?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
+    <?php 
+    include $root . '/app/view/fragment/fragmentMenu.html';
+    ?>
     
     <div class="container mt-5">
         <h2>Prendre un rendez-vous</h2>
@@ -65,6 +69,8 @@
     });
     </script>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php 
+    include $root . '/app/view/fragment/fragmentFooter.html';
+    ?>
 </body>
 </html>

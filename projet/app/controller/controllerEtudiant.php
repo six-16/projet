@@ -3,16 +3,19 @@ require_once '../model/ModelEtudiant.php';
 
 class ControllerEtudiant {
     public static function listRendezVous() {
+        include 'config.php';
         $etudiant_id = $_SESSION['login_id'];
         $rdvs = ModelEtudiant::getRendezVousByEtudiant($etudiant_id);
-        require '../view/etudiant/listRdv.php';
+        require '../view/etudiant/listRDV.php';
     }
 
     public static function prendreRendezVous() {
+        include 'config.php';
         $etudiant_id = $_SESSION['login_id'];
         $projets = ModelEtudiant::getProjetsDisponibles();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $creneau_id = $_POST['creneau_id'];
             
             // Vérifier si l'étudiant a déjà un RDV pour ce projet
@@ -37,6 +40,7 @@ class ControllerEtudiant {
     }
 
     public static function getCreneauxDisponibles() {
+        include 'config.php';
         $projet_id = $_GET['projet_id'] ?? null;
         if ($projet_id) {
             $creneaux = ModelEtudiant::getCreneauxDisponiblesByProjet($projet_id);
