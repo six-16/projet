@@ -65,7 +65,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
     </div>
     
     <?php 
-    require_once '../fragment/fragmentFooter.html'; 
+    require ($root . '/app/view/fragment/fragmentFooter.html');
     ?>
 
 </body>

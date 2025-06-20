@@ -17,7 +17,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
                 <div class="alert alert-danger"><?= $error ?></div>
                 <?php endif; ?>
                 
-                <form method="post">
+                <form method="POST" action="router2.php?action=login">
                     <div class="form-group">
                         <label for="login">Login</label>
                         <input type="text" class="form-control" id="login" name="login" required>

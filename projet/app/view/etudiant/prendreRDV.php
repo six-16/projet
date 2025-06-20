@@ -1,10 +1,11 @@
 <?php 
 require_once(__DIR__ . '/../fragment/fragmentHeader.html');
+require ($root . '/app/view/fragment/fragmentMenu.php');
+require ($root . '/app/view/fragment/fragmentJumbotron.html');
 ?>
 
 <body>
     <?php 
-    include $root . '/app/view/fragment/fragmentMenu.html';
     ?>
     
     <div class="container mt-5">

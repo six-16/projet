@@ -4,7 +4,6 @@ require ($root . '/app/view/fragment/fragmentMenu.php');
 require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
     
     <div class="container mt-5">
         <h2>Planning d'un projet</h2>

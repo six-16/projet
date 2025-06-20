@@ -1,7 +1,10 @@
-<?php require_once '../fragment/fragmentHeader.html'; ?>
+<?php 
+require_once '../fragment/fragmentHeader.html'; 
+require ($root . '/app/view/fragment/fragmentMenu.php');
+require ($root . '/app/view/fragment/fragmentJumbotron.html');
+?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
     
     <div class="container mt-5">
         <h2>Ajouter des créneaux consécutifs</h2>

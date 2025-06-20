@@ -23,11 +23,11 @@ class ControllerConnexion {
                 
                 // Redirection selon le rôle
                 if ($user['role_responsable']) {
-                    header('Location: router2.php?action=responsableListProjets');
+                    header('Location: router2.php?action=responsablelistProjets');
                 } elseif ($user['role_examinateur']) {
-                    header('Location: router2.php?action=examinateurListProjets');
+                    header('Location: router2.php?action=examinateurlistProjets');
                 } elseif ($user['role_etudiant']) {
-                    header('Location: router2.php?action=etudiantListRendezVous');
+                    header('Location: router2.php?action=etudiantlistRendezVous');
                 }
                 exit();
             } else {
