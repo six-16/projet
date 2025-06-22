@@ -76,17 +76,15 @@ class ModelResponsable {
 
     public static function getExaminateursByProjet($projet_id) {
         try {
-            $pdo = Model::getPDO();
-            $sql = "SELECT DISTINCT p.* FROM personne p 
-                    JOIN creneau c ON p.id = c.examinateur 
-                    WHERE c.projet = :projet_id";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':projet_id', $projet_id);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return false;
-        }
+        $pdo = Model::getPDO();
+        $sql = "SELECT id, label FROM projet WHERE responsable = :id_responsable";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id_responsable', $id_responsable);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
     }
 
     public static function getRendezVousByProjet($projet_id) {

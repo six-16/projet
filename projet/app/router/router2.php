@@ -43,7 +43,7 @@ switch ($action) {
     case "ListExaminateurs":
     case "addExaminateur":
     case "listExaminateursProjet":
-    case "Planning":
+    case "planningProjet":
         ControllerResponsable::$action();
         break;
 

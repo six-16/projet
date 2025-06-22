@@ -22,6 +22,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
         </form>
         
         <?php if (isset($rdvs)): ?>
+        <?php if (count($rdvs) > 0): ?>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -42,10 +43,13 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?php else: ?>
+        <p>Aucun rendez-vous trouvé pour ce projet.</p>
         <?php endif; ?>
+        <?php endif; ?>
+
     </div>
     
     <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
  ?>
 </body>
-</html>

@@ -14,7 +14,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
                 <select class="form-control" id="projet_id" name="projet_id" required>
                     <option value="">-- Choisir un projet --</option>
                     <?php foreach ($projets as $projet): ?>
-                    <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
+                    <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label'] ?? $projet['titre']) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -41,7 +41,6 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
         <?php endif; ?>
     </div>
     
-    <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
- ?>
+    <?php  require ($root . '/app/view/fragment/fragmentFooter.html'); ?>
 </body>
 </html>

@@ -28,13 +28,13 @@ $nom = $_SESSION['nom'] ?? '';
            aria-haspopup="true" aria-expanded="false" style="color: white">Responsable <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="router2.php?action=ListProjets" style="color: black">Liste de mes projets</a></li>
-            <li><a href="router2.php?action=AddProjet"style="color: black">Ajouter un projet</a></li>
+            <li><a href="router2.php?action=addProjet"style="color: black">Ajouter un projet</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="router2.php?action=ListExaminateurs" style="color: black">Liste des examinateurs</a></li>
             <li><a href="router2.php?action=addExaminateur"style="color: black">Ajout d'un examinateur</a></li>
             <li><a href="router2.php?action=listExaminateursProjet"style="color: black">Liste des examinateurs d’un projet</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="router2.php?action=Planning" style="color: black">Planning d’un projet</a></li>
+            <li><a href="router2.php?action=planningProjet" style="color: black">Planning d’un projet</a></li>
         </ul>
       </li>
         <?php endif; ?>

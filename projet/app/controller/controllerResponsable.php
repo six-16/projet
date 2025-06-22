@@ -77,7 +77,12 @@ class ControllerResponsable {
         if (isset($_POST['projet_id'])) {
             $rdvs = ModelResponsable::getRendezVousByProjet($_POST['projet_id']);
         }
-        
+        if (isset($_POST['projet_id'])) {
+        $projet_id = $_POST['projet_id'];
+        echo "<p>Projet sélectionné : $projet_id</p>"; // debug
+        $rdvs = ModelResponsable::getRendezVousByProjet($projet_id);
+}
+
         require '../view/responsable/planning.php';
     }
 }
