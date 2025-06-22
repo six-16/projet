@@ -41,7 +41,7 @@ class ControllerConnexion {
         include 'config.php';
         session_unset();
         session_destroy();
-        header('Location: router2.php');
+        header('Location: router2.php?action=login');
         exit();
     }
 

@@ -36,10 +36,7 @@ switch ($action) {
     case "register":
         ControllerConnexion::$action();
         break;
-    case "login":
-        ControllerConnexion::login();
-        break;
-    
+
 
     // Actions du responsable
     case "addProjet":
