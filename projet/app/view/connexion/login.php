@@ -1,5 +1,5 @@
 <?php 
-require ($root . '/app/view/fragment/fragmentHeader.html');
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');
 require ($root . '/app/view/fragment/fragmentMenu.php');
 require ($root . '/app/view/fragment/fragmentJumbotron.html');
 
@@ -7,7 +7,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
 ?>
 
 <body>
-    <div class="container mt-5" style="max-width: 500px;">
+    <div class="container mt-5" style="max-width: 500px; background-color: #a9dce3 ; color: #7689de">
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center">Connexion</h3>

@@ -5,10 +5,10 @@ body {
 
 .container {
     margin-top: 80px;
-    background-color: lemonchiffon;
+    background-color: #ff3333;
     width: 90%;
 }
 
 .jumbotron {
-  background-color:plum;
+    background-color: #ff3333;
 }

@@ -38,6 +38,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
         </form>
     </div>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
+ ?>
 </body>
 </html>

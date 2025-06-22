@@ -65,6 +65,7 @@ $router->dispatch();</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
+ ?>
 </body>
 </html>

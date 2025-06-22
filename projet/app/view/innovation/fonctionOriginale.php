@@ -108,6 +108,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
+ ?>
 </body>
 </html>

@@ -6,7 +6,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
 ?>
 
 <body>
-    <div class="container mt-5" style="max-width: 600px;">
+    <div class="container mt-5" style="max-width: 600px; background-color:  #ff6666">
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center">Inscription</h3>
@@ -54,7 +54,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                    <button type="submit" class="btn btn-secondary btn-block">S'inscrire</button>
                 </form>
                 
                 <div class="text-center mt-3">

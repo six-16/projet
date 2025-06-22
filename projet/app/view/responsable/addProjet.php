@@ -6,7 +6,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
 <body>
     
     <div class="container mt-5">
-        <h2>Ajout d'un nouveau projet</h2>
+        <h2>Formulaire de création d'un nouveau projet</h2>
         
         <?php if (isset($error)): ?>
         <div class="alert alert-danger"><?= $error ?></div>
@@ -29,6 +29,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
         </form>
     </div>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php     require ($root . '/app/view/fragment/fragmentFooter.html');
+ ?>
 </body>
 </html>

@@ -4,27 +4,26 @@ $connectedUser = '';
 if (!empty($_SESSION['login_nom']) && !empty($_SESSION['login_prenom'])) {
     $connectedUser = $_SESSION['login_nom'] . ' ' . $_SESSION['login_prenom'];
 }
-
+$roles = $_SESSION['roles'] ?? [];
 $nom = $_SESSION['nom'] ?? '';
 ?>
 
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="background-color: #a9dce3 ; color: #7689de ">
+  <div class="container-fluid" style="color: white">
+    <div class="navbar-header" style="color: white">
       <a class="navbar-brand" href="router2.php?action=login">
     <?= htmlspecialchars($studentNames) ?>
     <?php if ($connectedUser): ?>
         | <?= htmlspecialchars($connectedUser) ?> |
-    <?php endif; ?>
-</a>
+    <?php endif; ?></a>
 
     </div>
 
-    <ul class="nav navbar-nav">
-      <?php if (!empty($nom)) : ?>
+    <ul class="nav navbar-nav" style="color: #7689de">
+      
         <?php if (!empty($roles['responsable'])): ?>
-          <li class="dropdown">
+          <li class="dropdown" style="color: white">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
            aria-haspopup="true" aria-expanded="false">Responsable <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -41,7 +40,7 @@ $nom = $_SESSION['nom'] ?? '';
         <?php endif; ?>
 
         <?php if (!empty($roles['examinateur'])): ?>
-          <li class="dropdown">
+        <li class="dropdown" style="color: white">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
            aria-haspopup="true" aria-expanded="false">Examinateur <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -55,19 +54,19 @@ $nom = $_SESSION['nom'] ?? '';
         <?php endif; ?>
 
         <?php if (!empty($roles['etudiant'])): ?>
-          <li class="dropdown">
+          <li class="dropdown" style="color: white">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-               aria-haspopup="true" aria-expanded="false">Etudiant =<span class="caret"></span></a>
+               aria-haspopup="true" aria-expanded="false">Etudiant <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="router2.php?action=ListRendezVous">Liste de mes rendez-vous</a></li>
               <li><a href="router2.php?action=PrendreRendezVous">Prendre un RDV pour un projet</a></li> 
             </ul>
           </li> 
         <?php endif; ?>
-      <?php endif; ?>
+     
 
       <!-- Innovations (toujours visible) -->
-      <li class="dropdown">
+      <li class="dropdown"style="color: white">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
            aria-haspopup="true" aria-expanded="false">Innovation <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -78,7 +77,7 @@ $nom = $_SESSION['nom'] ?? '';
       </li> 
 
       <!-- Se connecter (toujours visible) -->
-      <li class="dropdown">
+      <li class="dropdown" style="color: white">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
            aria-haspopup="true" aria-expanded="false">Se connecter <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -98,6 +97,8 @@ $nom = $_SESSION['nom'] ?? '';
         Connecté en tant que : <strong><?= htmlspecialchars($userName) ?></strong>
       </p>
     <?php endif; ?>
+
+
   </div>
 </nav>
 
