@@ -10,16 +10,17 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Label</th>
-                    <th>Nombre d'étudiants</th>
+                    <th>Responsable</th>
+                    <th>Taille du groupe</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($projets as $projet): ?>
+              
+                    <?php foreach ($projets as $projet): ?>
                 <tr>
-                    <td><?= htmlspecialchars($projet['id']) ?></td>
                     <td><?= htmlspecialchars($projet['label']) ?></td>
+                    <td><?= htmlspecialchars($projet['responsable_nom'] . ' ' . $projet['responsable_prenom']) ?></td>
                     <td><?= htmlspecialchars($projet['groupe']) ?></td>
                 </tr>
                 <?php endforeach; ?>

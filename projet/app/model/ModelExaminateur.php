@@ -5,9 +5,16 @@ class ModelExaminateur {
     public static function getProjetsByExaminateur($examinateur_id) {
         try {
             $pdo = Model::getPDO();
-            $sql = "SELECT DISTINCT p.* FROM projet p 
-                    JOIN creneau c ON p.id = c.projet 
-                    WHERE c.examinateur = :examinateur_id";
+            $sql = "SELECT DISTINCT 
+                        p.label, 
+                        p.groupe, 
+                        per.nom AS responsable_nom, 
+                        per.prenom AS responsable_prenom
+                    FROM projet p
+                    JOIN personne per ON p.responsable = per.id
+                    JOIN creneau c ON c.projet = p.id
+                    WHERE c.examinateur = :examinateur_id;
+                    ";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':examinateur_id', $examinateur_id);
             $stmt->execute();

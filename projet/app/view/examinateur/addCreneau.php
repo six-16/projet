@@ -17,9 +17,13 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
                 <label for="projet_id">Sélectionnez un projet</label>
                 <select class="form-control" id="projet_id" name="projet_id" required>
                     <option value="">-- Choisir un projet --</option>
-                    <?php foreach ($projets as $projet): ?>
-                    <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
-                    <?php endforeach; ?>
+                    <?php if (!empty($projets) && is_array($projets)): ?>
+                        <?php foreach ($projets as $projet): ?>
+                        <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option disabled>Aucun projet disponible</option>
+                    <?php endif; ?>
                 </select>
             </div>
             <div class="form-group">

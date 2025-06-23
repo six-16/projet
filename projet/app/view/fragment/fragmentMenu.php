@@ -13,10 +13,13 @@ $nom = $_SESSION['nom'] ?? '';
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="router2.php?action=login" style="color: white">
-    <?= htmlspecialchars($studentNames) ?>
-    <?php if ($connectedUser): ?>
-        | <?= htmlspecialchars($connectedUser) ?> |
-    <?php endif; ?></a>
+        <?= htmlspecialchars($studentNames) ?>
+        <?php if ($connectedUser): ?>
+            | <?= htmlspecialchars($connectedUser) ?> |
+        <?php else: ?>
+            ||
+        <?php endif; ?>
+
 
     </div>
 
