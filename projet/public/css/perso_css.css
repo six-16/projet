@@ -1,0 +1,16 @@
+
+body {
+    background-color: white;
+}
+
+.container {
+    margin-top: 80px;
+    background-color: #ff3333;
+    width: 90%;
+}
+
+.jumbotron {
+    background-color: #ff3333;
+}
+
+
