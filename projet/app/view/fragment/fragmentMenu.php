@@ -19,7 +19,7 @@ $nom = $_SESSION['nom'] ?? '';
         <?php else: ?>
             ||
         <?php endif; ?>
-
+      </a>
 
     </div>
 
@@ -27,8 +27,7 @@ $nom = $_SESSION['nom'] ?? '';
       
         <?php if (!empty($roles['responsable'])): ?>
           <li class="dropdown" >
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-           aria-haspopup="true" aria-expanded="false" style="color: white">Responsable <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white">Responsable <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="router2.php?action=ListProjets" style="color: black">Liste de mes projets</a></li>
             <li><a href="router2.php?action=addProjet"style="color: black">Ajouter un projet</a></li>
@@ -97,7 +96,7 @@ $nom = $_SESSION['nom'] ?? '';
     <!-- Affichage du nom utilisateur connecté -->
     <?php if (!empty($nom)): ?>
       <p class="navbar-text navbar-right" style="margin-right:15px; color: #9d9d9d;">
-        Connecté en tant que : <strong><?= htmlspecialchars($userName) ?></strong>
+        Connecté en tant que : <strong><?= htmlspecialchars($connectedUser) ?></strong>
       </p>
     <?php endif; ?>
 
