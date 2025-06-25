@@ -1,7 +1,11 @@
-<?php require_once '../fragment/fragmentHeader.html'; ?>
+<?php 
+//require_once '../fragment/fragmentHeader.html'; 
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');
+?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
+    <?php require_once(__DIR__ . '/../fragment/fragmentMenu.php'); 
+    //require_once '../fragment/fragmentMenu.php'; ?>
     
     <div class="container mt-5">
         <h2>Fonction originale - Tableau de bord des soutenances</h2>
@@ -106,6 +110,7 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php require_once(__DIR__ . '/../fragment/fragmentFooter.html');
+    //require_once '../fragment/fragmentFooter.html'; ?>
 </body>
 </html>

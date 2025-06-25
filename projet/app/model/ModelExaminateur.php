@@ -2,6 +2,7 @@
 require_once 'Model.php';
 
 class ModelExaminateur {
+    
     public static function getProjetsByExaminateur($examinateur_id) {
         try {
             $pdo = Model::getPDO();
@@ -24,39 +25,53 @@ class ModelExaminateur {
         }
     }
 
-    public static function getAllCreneauxByExaminateur($examinateur_id) {
-        try {
-            $pdo = Model::getPDO();
-            $sql = "SELECT c.id, p.label, c.creneau 
-                    FROM creneau c
-                    JOIN projet p ON c.projet = p.id
-                    WHERE c.examinateur = :examinateur_id
-                    ORDER BY c.creneau";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':examinateur_id', $examinateur_id);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
 
-    public static function getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id) {
-        try {
-            $pdo = Model::getPDO();
-            $sql = "SELECT c.id, c.creneau 
-                    FROM creneau c
-                    WHERE c.projet = :projet_id AND c.examinateur = :examinateur_id
-                    ORDER BY c.creneau";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':projet_id', $projet_id);
-            $stmt->bindParam(':examinateur_id', $examinateur_id);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return false;
-        }
+public static function getAllCreneauxByExaminateur($examinateur_id) {
+    try {
+        $pdo = Model::getPDO();
+        $sql = "SELECT c.id, p.label as projet_label, c.creneau
+                FROM creneau c
+                JOIN projet p ON c.projet = p.id
+                WHERE c.examinateur = :examinateur_id
+                ORDER BY c.creneau";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':examinateur_id', $examinateur_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Debug: vérifiez ce que retourne la requête
+        error_log("Creneaux trouvés: " . print_r($result, true));
+        
+        return $result;
+    } catch (PDOException $e) {
+        error_log("Erreur dans getAllCreneauxByExaminateur: " . $e->getMessage());
+        return [];
     }
+}
+    
+    
+    public static function getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id) {
+    try {
+        $pdo = Model::getPDO();
+        $sql = "SELECT c.id, c.creneau 
+                FROM creneau c
+                WHERE c.projet = :projet_id 
+                AND c.examinateur = :examinateur_id
+                ORDER BY c.creneau";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':projet_id', $projet_id, PDO::PARAM_INT);
+        $stmt->bindParam(':examinateur_id', $examinateur_id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (PDOException $e) {
+        error_log("Erreur dans getCreneauxByProjetAndExaminateur: " . $e->getMessage());
+        return [];
+    }
+}
 
     public static function addCreneau($projet_id, $examinateur_id, $creneau) {
         try {

@@ -1,7 +1,10 @@
-<?php require_once '../fragment/fragmentHeader.html'; ?>
+<?php 
+//require_once '../fragment/fragmentHeader.html';
+require_once(__DIR__ . '/../fragment/fragmentHeader.html');?>
 
 <body>
-    <?php require_once '../fragment/fragmentMenu.php'; ?>
+    <?php require_once(__DIR__ . '/../fragment/fragmentMenu.php')
+    //require_once '../fragment/fragmentMenu.php'; ?>
     
     <div class="container mt-5">
         <h2>Amélioration de l'architecture MVC</h2>
@@ -63,6 +66,7 @@ $router->dispatch();</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     
-    <?php require_once '../fragment/fragmentFooter.html'; ?>
+    <?php require_once(__DIR__ . '/../fragment/fragmentFooter.html');
+    //require_once '../fragment/fragmentFooter.html'; ?>
 </body>
 </html>

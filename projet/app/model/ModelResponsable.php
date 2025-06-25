@@ -74,18 +74,25 @@ class ModelResponsable {
         }
     }
 
-    public static function getExaminateursByProjet($projet_id) {
-        try {
+
+public static function getExaminateursByProjet($projet_id) {
+    try {
         $pdo = Model::getPDO();
-        $sql = "SELECT id, label FROM projet WHERE responsable = :id_responsable";
+        $sql = "SELECT DISTINCT p.id, p.nom, p.prenom 
+                FROM personne p
+                JOIN creneau c ON p.id = c.examinateur
+                WHERE c.projet = :projet_id AND p.role_examinateur = 1
+                ORDER BY p.nom, p.prenom";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_responsable', $id_responsable);
+        $stmt->bindParam(':projet_id', $projet_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        return [];
+        // Loguer l'erreur si nécessaire
+        error_log("Erreur dans getExaminateursByProjet: " . $e->getMessage());
+        return false;
     }
-    }
+}
 
     public static function getRendezVousByProjet($projet_id) {
         try {

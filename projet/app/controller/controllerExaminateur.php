@@ -10,27 +10,28 @@ class ControllerExaminateur {
         require '../view/examinateur/listProjet.php';
     }
 
+    
     public static function listAllCreneaux() {
-        include 'config.php';
-        $examinateur_id = $_SESSION['login_id'];
-        $creneaux = ModelExaminateur::getAllCreneauxByExaminateur($examinateur_id);
-        require '../view/examinateur/listCreneauxAll.php';
+    include 'config.php';
+    $examinateur_id = $_SESSION['login_id']; 
+    $creneaux = ModelExaminateur::getAllCreneauxByExaminateur($examinateur_id);
+    require '../view/examinateur/listCreneauxAll.php';
+}
+
+public static function listCreneauxProjet() {
+    include 'config.php';
+    $examinateur_id = $_SESSION['login_id'];
+    $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
+
+    $creneaux = [];
+    if (isset($_POST['projet_id'])) {
+        $projet_id = $_POST['projet_id'];
+        $creneaux = ModelExaminateur::getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id);
     }
 
-    public static function listCreneauxProjet() {
-        include 'config.php';
-        $examinateur_id = $_SESSION['login_id'];
-        $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
-        
-        if (isset($_POST['projet_id'])) {
-            $creneaux = ModelExaminateur::getCreneauxByProjetAndExaminateur(
-                $_POST['projet_id'], 
-                $examinateur_id
-            );
-        }
-        
-        require '../view/examinateur/listCreneauxProjet.php';
-    }
+    require '../view/examinateur/listCreneauxProjet.php';
+}
+
 
     public static function addCreneau() {
         include 'config.php';
