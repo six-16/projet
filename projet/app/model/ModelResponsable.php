@@ -19,7 +19,6 @@ class ModelResponsable {
         try {
             $pdo = Model::getPDO();
             
-            // Récupérer le prochain ID disponible
             $sql = "SELECT MAX(id) as max_id FROM projet";
             $stmt = $pdo->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -54,7 +53,6 @@ class ModelResponsable {
         try {
             $pdo = Model::getPDO();
             
-            // Récupérer le prochain ID disponible
             $sql = "SELECT MAX(id) as max_id FROM personne";
             $stmt = $pdo->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);

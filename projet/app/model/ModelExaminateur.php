@@ -7,6 +7,7 @@ class ModelExaminateur {
         try {
             $pdo = Model::getPDO();
             $sql = "SELECT DISTINCT 
+                        p.id,
                         p.label, 
                         p.groupe, 
                         per.nom AS responsable_nom, 
@@ -64,14 +65,16 @@ public static function getAllCreneauxByExaminateur($examinateur_id) {
         $stmt->bindParam(':projet_id', $projet_id, PDO::PARAM_INT);
         $stmt->bindParam(':examinateur_id', $examinateur_id, PDO::PARAM_INT);
         $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
         
     } catch (PDOException $e) {
         error_log("Erreur dans getCreneauxByProjetAndExaminateur: " . $e->getMessage());
         return [];
     }
 }
+
+
 
     public static function addCreneau($projet_id, $examinateur_id, $creneau) {
         try {

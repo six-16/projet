@@ -20,17 +20,23 @@ class ControllerExaminateur {
 
 public static function listCreneauxProjet() {
     include 'config.php';
-    $examinateur_id = $_SESSION['login_id'];
-    $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
 
-    $creneaux = [];
+    $examinateur_id = $_SESSION['login_id'] ?? null;
+    if ($examinateur_id === null) {
+        die('Utilisateur non authentifié');
+    }
+
+    $projets = ModelExaminateur::getProjetsByExaminateur($examinateur_id);
+    $creneauxProjet = [];
+
     if (isset($_POST['projet_id'])) {
-        $projet_id = $_POST['projet_id'];
-        $creneaux = ModelExaminateur::getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id);
+        $projet_id = (int) $_POST['projet_id'];
+        $creneauxProjet = ModelExaminateur::getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id);
     }
 
     require '../view/examinateur/listCreneauxProjet.php';
 }
+
 
 
     public static function addCreneau() {

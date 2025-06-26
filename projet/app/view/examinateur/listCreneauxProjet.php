@@ -10,35 +10,30 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
         
         <form method="post" class="mb-4">
             <div class="form-group">
-                <label for="projet_id">Sélectionnez un projet :</label>
+                <label for="projet_id">Sélectionnez un projet</label>
                 <select class="form-control" id="projet_id" name="projet_id" required>
                     <option value="">-- Choisir un projet --</option>
                     <?php foreach ($projets as $projet): ?>
-                        <?php $projet_id_value = $projet['id'] ?? $projet['projet_id'] ?? ''; ?>
-                        <option value="<?= htmlspecialchars($projet_id_value) ?>"
-                            <?= (isset($_POST['projet_id']) && $_POST['projet_id'] == $projet_id_value) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($projet['label'] ?? 'Projet sans nom') ?>
+                        <option value="<?= $projet['id'] ?>" 
+                            <?= isset($_POST['projet_id']) && $_POST['projet_id'] == $projet['id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($projet['label'] ?? $projet['groupe']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Voir mes créneaux</button>
+            <button type="submit" class="btn btn-primary">Afficher</button>
         </form>
         
         <?php if (isset($_POST['projet_id'])): ?>
             <?php 
-    // Récupérer tous les créneaux et filtrer par projet sélectionné
-    $allCreneaux = ModelExaminateur::getAllCreneauxByExaminateur($examinateur_id);
-    $projet_id_post = $_POST['projet_id'] ?? null;
-
-    $creneauxProjet = array_filter($allCreneaux, function($creneau) use ($projet_id_post) {
-        return isset($creneau['projet_id']) && $creneau['projet_id'] == $projet_id_post;
-    });
-?>
-
+                $projet_id = (int) $_POST['projet_id']; 
+                $creneauxProjet = ModelExaminateur::getCreneauxByProjetAndExaminateur($projet_id, $examinateur_id);
+            ?>
             
             <div class="card mt-4">
-               
+                <div class="card-header">
+                    <h4>Créneaux pour le projet sélectionné</h4>
+                </div>
                 
                 <?php if (!empty($creneauxProjet)): ?>
                     <ul class="list-group list-group-flush">
@@ -52,11 +47,10 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
                     <div class="card-body">
                         <div class="alert alert-info mb-0">
                             <i class="fas fa-info-circle mr-2"></i>
-                            Vous n'avez pas encore proposé de créneaux pour ce projet.
+                            Aucun créneau disponible pour ce projet.
                         </div>
                     </div>
                 <?php endif; ?>
-                
             </div>
         <?php endif; ?>
     </div>
