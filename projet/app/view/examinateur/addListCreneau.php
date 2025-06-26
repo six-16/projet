@@ -19,7 +19,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');
                 <select class="form-control" id="projet_id" name="projet_id" required>
                     <option value="">-- Choisir un projet --</option>
                     <?php foreach ($projets as $projet): ?>
-                    <option value="<?= $projet['label'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
+                    <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

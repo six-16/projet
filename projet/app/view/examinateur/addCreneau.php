@@ -19,7 +19,7 @@ require ($root . '/app/view/fragment/fragmentJumbotron.html');?>
                     <option value="">-- Choisir un projet --</option>
                     <?php if (!empty($projets) && is_array($projets)): ?>
                         <?php foreach ($projets as $projet): ?>
-                        <option value="<?= $projet['label'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
+                        <option value="<?= $projet['id'] ?>"><?= htmlspecialchars($projet['label']) ?></option>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <option disabled>Aucun projet disponible</option>
